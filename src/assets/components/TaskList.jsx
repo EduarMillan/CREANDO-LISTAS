@@ -1,18 +1,19 @@
+import TaskCard from './TaskCard';
+import {useContext} from 'react';
+import {TaskContext} from '../../context/TaskContext'
 
+function TaskList() {
 
-function TaskList( props) {
+  const {tasks} = useContext(TaskContext);
  
-  if (props.tasks.length === 0) {
+  if (tasks.length === 0) {
     return <h1>no hay tareas aun</h1>;
   }
 
   return (
-    <div>
-      {props.tasks.map((task) => (
-        <div key={task.id}>
-          <h1>{task.titulo}</h1>
-            <p>{task.descripcion}</p>
-          </div>
+    <div className='grid grid-cols-4 gap-2 p-4 rounded-md'>
+      {tasks.map((task) => (
+      <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );
